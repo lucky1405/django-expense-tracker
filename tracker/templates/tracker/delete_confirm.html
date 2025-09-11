@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Deletion{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm border-danger">
+
+            <div class="card-header bg-danger text-white">
+                <h2 class="mb-0">Confirm Deletion</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Are you sure you want to permanently delete this transaction?</p>
+                
+                <div class="alert alert-warning">
+                    <p class="mb-1"><strong>Date:</strong> {{ transaction.date }}</p>
+                    <p class="mb-1"><strong>Type:</strong> {{ transaction.type }}</p>
+                    <p class="mb-1"><strong>Amount:</strong> ${{ transaction.amount }}</p>
+                    <p class="mb-0"><strong>Category:</strong> {{ transaction.category.name|default:"-" }}</p>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

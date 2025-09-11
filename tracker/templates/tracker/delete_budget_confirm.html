@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Deletion{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white"><h2 class="mb-0">Confirm Deletion</h2></div>
+            <div class="card-body">
+                <p class="lead">Are you sure you want to delete the budget for <strong>{{ budget.category.name }}</strong> for the month of <strong>{{ budget.month|date:"F Y" }}</strong>?</p>
+                <div class="alert alert-warning">
+                    This action cannot be undone.
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                        <a href="{% url 'budget_list' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

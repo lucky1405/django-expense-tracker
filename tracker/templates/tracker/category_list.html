@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Categories{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h2 class="mb-0">Manage Categories</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" class="mb-4">
+                    {% csrf_token %}
+                    <label for="category-name" class="form-label">Add a new category:</label>
+                    <div class="input-group">
+                        <input type="text" id="category-name" name="name" class="form-control" placeholder="e.g., Groceries, Salary" required>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+
+                <hr>
+
+                <h4 class="mt-4">Your Categories:</h4>
+                {% if categories %}
+                    <ul class="list-group">
+                        {% for category in categories %}
+                            <li class="list-group-item">{{ category.name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="alert alert-info mt-3" role="alert">
+                        You have no categories yet. Add one above to get started!
+                    </div>
+                {% endif %}
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
